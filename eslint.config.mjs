@@ -37,7 +37,7 @@ export default tseslint.config(
           ignoreDeclarationSort: true,
           ignoreMemberSort: false,
           memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-          allowSeparatedGroups: false,
+          allowSeparatedGroups: true,
         },
       ],
     },

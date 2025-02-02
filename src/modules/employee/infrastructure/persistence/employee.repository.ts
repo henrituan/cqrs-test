@@ -6,6 +6,10 @@ import { IEmployeeRepository } from '../../domain/ports/repository.interface';
 @Injectable()
 export class EmployeeRepository implements IEmployeeRepository {
   findById(id: string) {
+    if (id === 'wrong-id') {
+      return Promise.reject(new Error(`Employee not found with id ${id}`));
+    }
+
     const mockEmployee = new Employee({
       id,
       name: 'John Doe',
