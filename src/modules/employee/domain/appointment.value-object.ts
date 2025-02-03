@@ -1,42 +1,48 @@
 type AppointmentStatus = 'SCHEDULED' | 'CANCELLED' | 'COMPLETED';
 
-export class Appointment {
-  private id: string;
+export type AppointmentProps = {
+  id: string;
+  date: Date;
+  status: AppointmentStatus;
+  cancelReason?: string;
+};
 
-  constructor(
-    private date: Date,
-    private cancelReason: string,
-    private status: AppointmentStatus,
-  ) {
-    this.id = Math.floor(Math.random() * 1000).toString();
+export class Appointment {
+  private props: AppointmentProps;
+
+  constructor(input: Omit<AppointmentProps, 'id'>) {
+    this.props = {
+      id: Math.floor(Math.random() * 1000).toString(),
+      ...input,
+    };
   }
 
   public cancelAppointment(cancelReason: string): void {
-    this.status = 'CANCELLED';
-    this.cancelReason = cancelReason;
+    this.props.status = 'CANCELLED';
+    this.props.cancelReason = cancelReason;
   }
 
   public completeAppointment(): void {
-    this.status = 'COMPLETED';
+    this.props.status = 'COMPLETED';
   }
 
   public rescheduleAppointment(date: Date): void {
-    this.date = date;
+    this.props.date = date;
   }
 
   public getId(): string {
-    return this.id;
+    return this.props.id;
   }
 
   public getDate(): Date {
-    return this.date;
+    return this.props.date;
   }
 
   public getCancelReason(): string {
-    return this.cancelReason;
+    return this.props.cancelReason ?? '';
   }
 
   public getStatus(): AppointmentStatus {
-    return this.status;
+    return this.props.status;
   }
 }

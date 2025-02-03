@@ -18,8 +18,10 @@ export class Employee {
     this.props = props;
   }
 
-  public addAppointment(appointment: Appointment): void {
-    this.props.appointments.push(appointment);
+  public addAppointment(date: Date): void {
+    this.props.appointments.push(
+      new Appointment({ date, status: 'SCHEDULED' }),
+    );
   }
 
   public cancelAppointment(appointmentId: string, cancelReason: string): void {
