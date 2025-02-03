@@ -25,8 +25,17 @@ export class EmployeeRepository implements IEmployeeRepository {
     return Promise.resolve(mockEmployee);
   }
 
-  save() {
+  save(employee: Employee) {
     console.log('Saving Employee (not implemented)');
+
+    const appointments = employee.getAppointments();
+    if (appointments.length) {
+      console.log(
+        'Saving appointments (not implemented): ',
+        JSON.stringify(appointments),
+      );
+    }
+
     return Promise.resolve();
   }
 }
